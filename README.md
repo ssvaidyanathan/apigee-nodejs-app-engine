@@ -30,10 +30,47 @@ This repo shows an example to deploy a node app to GCP App Engine (standard), se
 
 - In the GCP console, go to Security --> Identity-Aware Proxy and follow the steps to setup 
 - Configure the OAuth consent screen and provide the necessary information
+- Configure an OAuth Client ID _(will be used later)_
 - Setup IAP Access
 	- Create a service account with *IAP-secured Web App User*
-	- Download the service account JSON _(which will be used later)_
+	- Download the service account JSON _(will be used later)_
 - Turn on Cloud IAP
 - For more info and details, visit [this](https://cloud.google.com/iap/docs/app-engine-quickstart#enabling_iap) doc
 
-Now try logging into the App Engine URL in an Incognito mode (using a different user account), you should see an error page. Try the same using your account (Project Owner or any user who has IAP-secured Web App User role), you should see the _"Hello from Apigee !!! "_ message.
+- Now try logging into the App Engine URL in an Incognito mode (using a different user account), you should see an error page. Try the same using your account (Project Owner or any user who has IAP-secured Web App User role), you should see the _"Hello from Apigee !!! "_ message.
+
+
+### Configure Key Value Map in Apigee
+
+- Login to [Apigee](https://apigee.com/edge) to your appropriate Apigee org
+- Navigate to Admin --> Environments --> Key Value Maps
+- Select an environment
+- Click the "+ Key Value Map" button
+- Provide the name as "iam-aware" and check the "Encrypted" checkbox
+- Click the created Map and click the "+" button to add the following entries from your downloaded service account JSON file and Client ID from GCP
+
+| Key                    | Value                                        |
+|------------------------|----------------------------------------------|
+| client_email           | client_email from the service account json   |
+| private_key            | private_key from the service account json    |
+| private_key_id         | private_key_id from the service account json |
+| google_oauth_client_id | OAuth Client Id configured                   |
+
+### Deploy Apigee sharedflow
+
+- Login to [Apigee](https://apigee.com/edge) to your appropriate Apigee org
+- Navigate to Develop --> Shared Flows
+- Click + Shared Flows and select "Upload bundle"
+- In your cloned repo (in your local machine), browse to `apigee-bundles` and select *iap-aware_sf.zip*
+- Provide `iap-aware` as the name, click "Create"
+- Deploy the sharedflow
+
+### Deploy Apigee Proxy
+
+- Login to [Apigee](https://apigee.com/edge) to your appropriate Apigee org
+- Navigate to Develop --> API Proxies
+- Click + Proxy and select "Proxy bundle", click "Next"
+- In your cloned repo (in your local machine), browse to `apigee-bundles` and select *iap-aware_proxy.zip*
+- Give a name, click "Next" and complete the proxy wizard
+- In the Develop tab, on the left menu, click "Target Endpoints". Replace the `<URL>https://{app-engine-url}</URL>` with your App Engine URL
+
