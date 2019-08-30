@@ -25,3 +25,13 @@ This repo shows an example to deploy a node app to GCP App Engine (standard), se
 - Once complete, you should be able to see the service under App Engine --> Services in the GCP console. 
 	NOTE: Make sure you are on the right GCP Project
 - By clicking the link in the console, it should open a new browser tab that shows _"Hello from Apigee !!! "_
+
+### Configure IAP
+
+- In the GCP console, go to Security --> Identity-Aware Proxy and follow the steps to setup 
+- Configure the OAuth consent screen and provide the necessary information
+- Setup IAP Access
+	- Create a service account with *IAP-secured Web App User*
+	- Download the service account JSON _(which will be used later)_
+- Turn on Cloud IAP
+- For more info and details, visit [this](https://cloud.google.com/iap/docs/app-engine-quickstart#enabling_iap) doc
