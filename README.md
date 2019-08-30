@@ -35,3 +35,5 @@ This repo shows an example to deploy a node app to GCP App Engine (standard), se
 	- Download the service account JSON _(which will be used later)_
 - Turn on Cloud IAP
 - For more info and details, visit [this](https://cloud.google.com/iap/docs/app-engine-quickstart#enabling_iap) doc
+
+Now try logging into the App Engine URL in an Incognito mode (using a different user account), you should see an error page. Try the same using your account (Project Owner or any user who has IAP-secured Web App User role), you should see the _"Hello from Apigee !!! "_ message.
