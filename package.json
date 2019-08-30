@@ -1,0 +1,15 @@
+{
+  "name": "apigee-nodejs-app-engine",
+  "version": "1.0.0",
+  "description": "Hello World NodeJS App in GCP App Engine",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "deploy": "gcloud app deploy"
+  },
+  "author": "Sai Saran Vaidyanathan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
