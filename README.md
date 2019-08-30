@@ -79,7 +79,7 @@ This repo shows an example to deploy a node app to GCP App Engine (standard), se
 
 - Try removing the access in IAP for the service account and hit the URL. Should throw an error.
 
-NOTE: In the `AM-Set-AccessToken`, you can set any flow variables as custom header with "X-Var-" as prefix. The NodeJS example will pick those and set them as response headers
+NOTE: In the `AM-Set-AccessToken` policy in the proxy, you can set any flow variable as custom header with "X-Var-" as prefix. The app engine (underlying NodeJS) can use the custom headers within the code for business logic. In this NodeJS example, it will pick those and set them as response headers
 
 For example, run the following curl command `curl -i https://{org}-{env}.apigee.net/iap-aware`, it should show ```x-var-foo: bar, x-var-abc: xyz``` which are set in the policy
 
