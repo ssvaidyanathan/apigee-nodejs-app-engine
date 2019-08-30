@@ -63,7 +63,7 @@ This repo shows an example to deploy a node app to GCP App Engine (standard), se
 - Click + Shared Flows and select "Upload bundle"
 - In your cloned repo (in your local machine), browse to `apigee-bundles` and select *iap-aware_sf.zip*
 - Provide `iap-aware` as the name, click "Create"
-- Deploy the sharedflow
+- Deploy the sharedflow (to the environment where the Key Value Map was created)
 
 ### Deploy Apigee Proxy
 
@@ -73,4 +73,13 @@ This repo shows an example to deploy a node app to GCP App Engine (standard), se
 - In your cloned repo (in your local machine), browse to `apigee-bundles` and select *iap-aware_proxy.zip*
 - Give a name, click "Next" and complete the proxy wizard
 - In the Develop tab, on the left menu, click "Target Endpoints". Replace the `<URL>https://{app-engine-url}</URL>` with your App Engine URL
+- Deploy the proxy (to the same environment were the Key Value Map was created)
+
+- Enable trace and make a call to "https://{org}-{env}.apigee.net/iap-aware", it should return _"Hello from Apigee !!! "_ message. In the trace, you will see that it invokes the Sharedflow which in turn generates an OAuth token (using the service account) which is authorized by IAP. 
+
+- Try removing the access in IAP for the service account and hit the URL. Should throw an error.
+
+NOTE: In the `AM-Set-AccessToken`, you can set any flow variables as custom header with "X-Var-" as prefix. The NodeJS example will pick those and set them as response headers
+
+For example, run the following curl command `curl -i https://{org}-{env}.apigee.net/iap-aware`, it should show ```x-var-foo: bar, x-var-abc: xyz``` which are set in the policy
 
