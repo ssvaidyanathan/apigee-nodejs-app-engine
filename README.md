@@ -83,3 +83,7 @@ NOTE: In the `AM-Set-AccessToken` policy in the proxy, you can set any flow vari
 
 For example, run the following curl command `curl -i https://{org}-{env}.apigee.net/iap-aware`, it should show ```x-var-foo: bar, x-var-abc: xyz``` which are set in the policy
 
+### apigee-access modeule
+
+- If your NodeJS proxy uses apigee-access node_module, you can set all the flow variables as custom headers (like mentioned above). Use the Key Value Map policy and Cache policies to populate customer headers and pass that to the Apigee Target (which is the App Engine in this case). 
+- App Engine can use the custom headers for its internal business logic. This would be the best approach to re-write the NodeJS code using apigee-access to App Engine
