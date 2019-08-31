@@ -85,5 +85,5 @@ For example, run the following curl command `curl -i https://{org}-{env}.apigee.
 
 ### Replacing apigee-access module
 
-- If your NodeJS proxy uses apigee-access node_module, you can set all the flow variables as custom headers (like mentioned above). Use the Key Value Map policy and Cache policies to populate customer headers and pass that to the Apigee Target (which is the App Engine in this case). 
+- If your NodeJS proxy uses apigee-access node_module, you can set all the flow variables as custom headers (like mentioned above). Use the Key Value Map policy and Cache policies to populate custom headers and pass that to the Apigee Target (which is the App Engine in this case). 
 - App Engine can use the custom headers for its internal business logic. This would be the best approach to re-write the NodeJS code using apigee-access to App Engine
